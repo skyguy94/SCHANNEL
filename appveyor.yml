@@ -3,7 +3,7 @@ version: 1.{build}.0
 install: 
     - ps: |
             Get-PackageProvider -Name NuGet -Force
-            Install-Module pester
+            Install-Module pester -Force
 
 build: false
 
@@ -15,7 +15,7 @@ test_script:
         if ($result.FailedCount -gt 0) { 
             throw "$($result.FailedCount) tests failed."
         }
-    
+
 deploy_script:
   - ps: |
         $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
