@@ -1,5 +1,5 @@
 ﻿Import-Module -Name "$PSScriptRoot\..\DSCResources\Cipher"
-InModuleScope 'Cipher' {
+InModuleScope Cipher {
     Describe 'Cipher is a DSC Resource' {
         Context "Meets DSC syntax requirements" {
 
