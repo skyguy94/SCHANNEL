@@ -1,15 +1,15 @@
-﻿Import-Module -Name '..\DSCResources\CipherOrder'
+﻿Import-Module -Name "$PSScriptRoot\..\DSCResources\CipherOrder"
 InModuleScope 'CipherOrder' {
     Describe 'CipherOrder is a DSC Resource' {
 
         Context "Meets DSC syntax requirements" {
-	        It 'Should be syntactically correct' {
-		        $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\CipherOrder\CipherOrder.schema.mof")
+            It 'Should be syntactically correct' {
+                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\CipherOrder\CipherOrder.schema.mof")
                 $res | Should Be $true
-	        }
+            }
 
             It 'Should be a well formed resource' {
-		        $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\CipherOrder")
+                $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\CipherOrder")
 
                 $res | Should Be $true
             }

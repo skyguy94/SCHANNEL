@@ -1,15 +1,15 @@
-﻿Import-Module -Name '..\DSCResources\SSLProtocol'
+﻿Import-Module -Name "$PSScriptRoot\..\DSCResources\SSLProtocol"
 InModuleScope 'SSLProtocol' {
     Describe 'SSLProtocol is a DSC Resource' {
 
         Context "Meets DSC syntax requirements" {
-	        It 'Should be syntactically correct' {
-		        $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\SSLProtocol\SSLProtocol.schema.mof")
+            It 'Should be syntactically correct' {
+                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\SSLProtocol\SSLProtocol.schema.mof")
                 $res | Should Be $true
-	        }
+            }
 
             It 'Should be a well formed resource' {
-		        $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\SSLProtocol")
+                $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\SSLProtocol")
 
                 $res | Should Be $true
             }

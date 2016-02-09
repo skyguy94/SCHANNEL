@@ -1,15 +1,15 @@
-﻿Import-Module -Name '..\DSCResources\KeyExchangeAlgorithm'
+﻿Import-Module -Name "$PSScriptRoot\..\DSCResources\KeyExchangeAlgorithm"
 InModuleScope 'KeyExchangeAlgorithm' {
     Describe 'KeyExchangeAlgorithm is a DSC Resource' {
 
         Context "Meets DSC syntax requirements" {
-	        It 'Should be syntactically correct' {
-		        $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\KeyExchangeAlgorithm\KeyExchangeAlgorithm.schema.mof")
+            It 'Should be syntactically correct' {
+                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\KeyExchangeAlgorithm\KeyExchangeAlgorithm.schema.mof")
                 $res | Should Be $true
-	        }
+            }
 
             It 'Should be a well formed resource' {
-		        $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\KeyExchangeAlgorithm")
+                $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\KeyExchangeAlgorithm")
 
                 $res | Should Be $true
             }
