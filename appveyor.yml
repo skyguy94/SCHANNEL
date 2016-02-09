@@ -3,13 +3,12 @@ version: 1.{build}.0
 install: 
     - ps: |
             Get-PackageProvider -Name NuGet -Force
-            Install-Module pester -Force
-
+            Install-Module -Name pester -Force
+            Install-Module -Name xDSCResourceDesigner -Force
 build: false
 
 test_script:
     - ps: |
-        Import-Module pester
         $result = Invoke-Pester .\Tests\*.tests.ps1 -OutputFormat NUnitXml -OutputFile  ".\TestsResults.xml" -PassThru
         Invoke-RestMethod -Uri "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)" -Method Post -InFile (Resolve-Path ".\TestResults.xml")
         if ($result.FailedCount -gt 0) { 
