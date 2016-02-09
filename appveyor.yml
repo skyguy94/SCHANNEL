@@ -21,3 +21,8 @@ deploy_script:
         $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
         Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION}
         Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:ACCESS_TOKEN} -Confirm:$false
+
+notifications:        
+- provider: Slack
+  incoming_webhook:
+    secure: doxpYXSV9U+Jb1vuaUOfeZiPu0KK5qgOERGa3l7aUo8BAjf8q6IMaA4SzwT8SvoeeOkS2JRQtN3XQ1lVhXbY+56TbmWsHAgKYKZlU2YpY5s=
