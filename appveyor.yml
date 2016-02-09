@@ -5,6 +5,7 @@ install:
             Get-PackageProvider -Name NuGet -Force
             Install-Module -Name pester -Force
             Install-Module -Name xDSCResourceDesigner -Force
+            $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
 build: false
 
 test_script:
