@@ -4,12 +4,12 @@ InModuleScope 'Hash' {
 
         Context "Meets DSC syntax requirements" {
             It 'Should be syntactically correct' {
-                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\Hash\Hash.schema.mof")
+                $res = Test-xDscSchema -Path "$PSScriptRoot\..\DSCResources\Hash\Hash.schema.mof"
                 $res | Should Be $true
             }
 
             It 'Should be a well formed resource' {
-                $res = Test-xDscResource -Name (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\Hash")
+                $res = Test-xDscResource -Name "$PSScriptRoot\..\DSCResources\Hash"
 
                 $res | Should Be $true
             }

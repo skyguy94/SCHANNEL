@@ -4,12 +4,12 @@ InModuleScope 'SSLProtocol' {
 
         Context "Meets DSC syntax requirements" {
             It 'Should be syntactically correct' {
-                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\SSLProtocol\SSLProtocol.schema.mof")
+                $res = Test-xDscSchema -Path "$PSScriptRoot\..\DSCResources\SSLProtocol\SSLProtocol.schema.mof"
                 $res | Should Be $true
             }
 
             It 'Should be a well formed resource' {
-                $res = Test-xDscResource -Name (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\SSLProtocol")
+                $res = Test-xDscResource -Name "$PSScriptRoot\..\DSCResources\SSLProtocol"
 
                 $res | Should Be $true
             }
