@@ -1,7 +1,9 @@
 os: WMF 5
 version: 1.{build}.0
 install: 
-  - ps: Install-Module pester
+    - ps: |
+            Get-PackageProvider -Name NuGet -Force
+            Install-Module pester
 
 build: false
 
