@@ -1,8 +1,8 @@
 ﻿Import-Module -Name "$PSScriptRoot\..\DSCResources\Cipher"
 InModuleScope 'Cipher' {
     Describe 'Cipher is a DSC Resource' {
-
         Context "Meets DSC syntax requirements" {
+
             It 'Should be syntactically correct' {
                 $res = Test-xDscSchema -Path "$PSScriptRoot\..\DSCResources\Cipher\Cipher.schema.mof"
                 $res | Should Be $true
