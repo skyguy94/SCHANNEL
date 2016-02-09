@@ -4,12 +4,12 @@ InModuleScope 'KeyExchangeAlgorithm' {
 
         Context "Meets DSC syntax requirements" {
             It 'Should be syntactically correct' {
-                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\KeyExchangeAlgorithm\KeyExchangeAlgorithm.schema.mof")
+                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\KeyExchangeAlgorithm\KeyExchangeAlgorithm.schema.mof")
                 $res | Should Be $true
             }
 
             It 'Should be a well formed resource' {
-                $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\KeyExchangeAlgorithm")
+                $res = Test-xDscResource -Name (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\KeyExchangeAlgorithm")
 
                 $res | Should Be $true
             }

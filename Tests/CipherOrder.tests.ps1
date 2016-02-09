@@ -4,12 +4,12 @@ InModuleScope 'CipherOrder' {
 
         Context "Meets DSC syntax requirements" {
             It 'Should be syntactically correct' {
-                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "..\DSCResources\CipherOrder\CipherOrder.schema.mof")
+                $res = Test-xDscSchema -Path (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\CipherOrder\CipherOrder.schema.mof")
                 $res | Should Be $true
             }
 
             It 'Should be a well formed resource' {
-                $res = Test-xDscResource -Name (Join-Path (Get-Location) "..\DSCResources\CipherOrder")
+                $res = Test-xDscResource -Name (Join-Path (Get-Location) "$PSScriptRoot\..\DSCResources\CipherOrder")
 
                 $res | Should Be $true
             }
