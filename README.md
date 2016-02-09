@@ -1,0 +1,2 @@
+# SCHANNEL
+SCHANNEL DSC Resource
