@@ -4,8 +4,7 @@ install:
             Get-PackageProvider -Name NuGet -Force
             Install-Module -Name pester -RequiredVersion 3.3.5 -Force
             Install-Module -Name xDSCResourceDesigner -Force
-            Install-Module -Name PowerShellGet -RequiredVersion 1.0.0.1 -Force
-            Import-Module -Name PowershellGet -RequiredVersion 1.0.0.1
+            Import-Module -Name PowershellGet
             $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
 
 build: false
