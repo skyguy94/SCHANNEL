@@ -10,6 +10,7 @@ build: false
 
 test_script:
     - ps: |
+        Import-Module -name Cipher
         $outputFile = Join-Path (Get-Location) "TestResults.xml"
         $result = Invoke-Pester .\Tests\*.tests.ps1 -OutputFormat NUnitXml -OutputFile $outputFile -PassThru
         Invoke-RestMethod -Uri "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)" -Method Post -InFile $outputFile -ContentType "application/json"
