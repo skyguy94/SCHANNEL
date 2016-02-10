@@ -3,14 +3,14 @@ version: 1.{build}.0
 install: 
     - ps: |
             Get-PackageProvider -Name NuGet -Force
-            Install-Module -Name pester -Force
-            Install-Module -Name xDSCResourceDesigner -Force
+            Install-Module -Name pester -RequiredVersion 3.3.5 -Verbose -Force
+            Install-Module -Name xDSCResourceDesigner -Verbose -Force
             $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
+
 build: false
 
 test_script:
     - ps: |
-        Import-Module -name Cipher
         $outputFile = Join-Path (Get-Location) "TestResults.xml"
         $result = Invoke-Pester .\Tests\*.tests.ps1 -OutputFormat NUnitXml -OutputFile $outputFile -PassThru
         Invoke-RestMethod -Uri "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)" -Method Post -InFile $outputFile -ContentType "application/json"
