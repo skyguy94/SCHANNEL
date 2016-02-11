@@ -1,8 +1,9 @@
 os: WMF 5
 version: 1.{build}.0
 environment:
-    ACCESS_TOKEN:
+    MyGetToken:
         secure: 8JYQskLoNjZ2sQqHhsy/ThS9lOp8I9eTNVp642DpyaK2CwXCSLiINQThwzySNTx2
+        
 install: 
     - ps: |
             Get-PackageProvider -Name NuGet -Force
@@ -25,4 +26,4 @@ deploy_script:
         $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
         #Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION} Won't work until PowershellGet on Appveyor is at 1.0.0.1.
         #TODO: Update Version
-        Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:ACCESS_TOKEN} -Confirm:$false
+        Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:MyGetToken} -Confirm:$false
