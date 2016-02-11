@@ -6,7 +6,7 @@ environment:
 install: 
   - ps: |
       Get-PackageProvider -Name NuGet -Force
-      Register-PSRepository -Name MyGet -PublishLocation https://www.myget.org/F/careevolution/api/v2/package -InstallationPolicy Trusted
+      Register-PSRepository -Name MyGet -SourceLocation https://www.myget.org/F/careevolution/api/v3/index.json -PublishLocation https://www.myget.org/F/careevolution/api/v2/package -InstallationPolicy Trusted
       Install-Module -Name pester -RequiredVersion 3.3.5 -Force
       Install-Module -Name xDSCResourceDesigner -Force
       $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
