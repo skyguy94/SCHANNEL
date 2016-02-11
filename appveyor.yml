@@ -3,7 +3,7 @@ version: 1.{build}.0
 install: 
     - ps: |
             Get-PackageProvider -Name NuGet -Force
-            Install-Module -Name pester -RequiredVersion 3.3.5 -Force
+            Install-Module -Name pester -Force
             Install-Module -Name xDSCResourceDesigner -Force
             $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
 
