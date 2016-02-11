@@ -20,4 +20,4 @@ deploy_script:
       $path = Join-Path $Env:APPVEYOR_BUILD_FOLDER "$Env:APPVEYOR_PROJECT_NAME.psd1"
       (Get-Content $path) -Replace '0.0.0', $Env:APPVEYOR_BUILD_VERSION | Set-Content $path
       #Update-ModuleManifest -Path $path -ModuleVersion $Env:APPVEYOR_BUILD_VERSION Won't work until PowershellGet on Appveyor is at 1.0.0.1.
-      Publish-Module -Path .\ -Name $Env:APPVEYOR_PROJECT_NAME -Repository MyGetFeed -NuGetApiKey $Env:MyGetToken -Confirm:$false
+      Publish-Module -Name $Env:APPVEYOR_PROJECT_NAME -Repository MyGetFeed -NuGetApiKey $Env:MyGetToken
