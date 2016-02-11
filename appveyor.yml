@@ -1,9 +1,12 @@
 os: WMF 5
 version: 1.{build}.0
+environment:
+    ACCESS_TOKEN:
+        secure: 8JYQskLoNjZ2sQqHhsy/ThS9lOp8I9eTNVp642DpyaK2CwXCSLiINQThwzySNTx2
 install: 
     - ps: |
             Get-PackageProvider -Name NuGet -Force
-            Install-Module -Name pester -Force
+            Install-Module -Name pester -RequiredVersion 3.3.5 -Force
             Install-Module -Name xDSCResourceDesigner -Force
             $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
 
@@ -19,4 +22,5 @@ deploy_script:
   - ps: |
         $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
         #Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION} Won't work until PowershellGet on Appveyor is at 1.0.0.1.
+        #TODO: Update Version
         Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:ACCESS_TOKEN} -Confirm:$false

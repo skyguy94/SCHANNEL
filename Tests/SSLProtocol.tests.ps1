@@ -1,5 +1,5 @@
-﻿Import-Module -Name "$PSScriptRoot\..\DSCResources\SSLProtocol"
-InModuleScope 'SSLProtocol' {
+﻿Import-Module "$PSScriptRoot\..\DSCResources\SSLProtocol"
+InModuleScope SSLProtocol {
     Describe 'SSLProtocol is a DSC Resource' {
 
         Context "Meets DSC syntax requirements" {
