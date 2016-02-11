@@ -1,8 +1,8 @@
 os: WMF 5
 version: 1.{build}.0
 environment:
-    MyGetToken:
-        secure: 8JYQskLoNjZ2sQqHhsy/ThS9lOp8I9eTNVp642DpyaK2CwXCSLiINQThwzySNTx2
+    MyGetToken: "bob"
+        #secure: 8JYQskLoNjZ2sQqHhsy/ThS9lOp8I9eTNVp642DpyaK2CwXCSLiINQThwzySNTx2
         
 install: 
     - ps: |
