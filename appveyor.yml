@@ -1,25 +1,25 @@
 os: WMF 5
 version: 1.{build}.0
 environment:
-  MyGetToken:
+  AccessToken:
     secure: kDi+hDqfTslNOE+Dr+iOFWtqoJusFVPQl4ob95tDm6GSCQRifB4yAhqLjkRASzCX
 install: 
   - ps: |
-    Get-PackageProvider -Name NuGet -Force
-    Register-PSRepository -Name MyGet -PublishLocation https://www.myget.org/F/careevolution/api/v2/package -InstallationPolicy Trusted
-    Install-Module -Name pester -RequiredVersion 3.3.5 -Force
-    Install-Module -Name xDSCResourceDesigner -Force
-    $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
-    Get-ChildItem Env:
+      Get-PackageProvider -Name NuGet -Force
+      Register-PSRepository -Name MyGet -PublishLocation https://www.myget.org/F/careevolution/api/v2/package -InstallationPolicy Trusted
+      Install-Module -Name pester -RequiredVersion 3.3.5 -Force
+      Install-Module -Name xDSCResourceDesigner -Force
+      $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
+      Get-ChildItem Env:
 build: false
 test_script:
   - ps: |
-    $outputFile = Join-Path (Get-Location) "TestResults.xml"
-    $result = Invoke-Pester -OutputFormat NUnitXml -OutputFile $outputFile -PassThru        
-    (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", $outputFile)
+      $outputFile = Join-Path (Get-Location) "TestResults.xml"
+      $result = Invoke-Pester -OutputFormat NUnitXml -OutputFile $outputFile -PassThru        
+      (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", $outputFile)
 deploy_script:
   - ps: |
-    $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
-    #Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION} Won't work until PowershellGet on Appveyor is at 1.0.0.1.
-    #TODO: Update Version
-    Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:MyGetToken} -Confirm:$false
+      $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
+      #Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION} Won't work until PowershellGet on Appveyor is at 1.0.0.1.
+      #TODO: Update Version
+      Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:AccessToken} -Confirm:$false
