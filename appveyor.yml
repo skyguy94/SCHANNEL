@@ -1,14 +1,14 @@
 os: WMF 5
 version: 1.{build}.0
-
 install: 
   - ps: |
       Get-PackageProvider -Name NuGet -Force | Out-Null
-      Register-PSRepository -Name MyGet -SourceLocation https://www.myget.org/F/careevolution/api/v2 -PublishLocation https://www.myget.org/F/careevolution/api/v2/package -InstallationPolicy Trusted
+      $publishUri = 'https://www.myget.org/F/careevolution/api/v2'
+      $sourceUri = 'https://www.myget.org/F/careevolution/api/v2/package'
+      Register-PSRepository -Name MyGetFeed -SourceLocation $sourceUri -PublishLocation $publishUri
       Install-Module -Name pester -RequiredVersion 3.3.5 -Force
       Install-Module -Name xDSCResourceDesigner -Force
       $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
-
 build: false
 test_script:
   - ps: |
@@ -18,8 +18,6 @@ test_script:
 deploy_script:
   - ps: |
       $path = Join-Path $Env:APPVEYOR_BUILD_FOLDER "${Env:APPVEYOR_PROJECT_NAME}.psd1"
-      Write-Host "Path: $path"
-      Write-Host "$Env:AccessToken"
-      #Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION} Won't work until PowershellGet on Appveyor is at 1.0.0.1.
-      #TODO: Update Version
-      Publish-Module -Name $Env:APPVEYOR_PROJECT_NAME -Repository MyGet -NuGetApiKey $Env:AccessToken -Confirm:$false
+      (Get-Content $path) -Replace '0.0.0', $Env:APPVEYOR_BUILD_VERSION
+      #Update-ModuleManifest -Path $path -ModuleVersion $Env:APPVEYOR_BUILD_VERSION Won't work until PowershellGet on Appveyor is at 1.0.0.1.
+      Publish-Module -Name $Env:APPVEYOR_PROJECT_NAME -Repository MyGetFeed -NuGetApiKey $Env:MyGetToken -Confirm:$false
