@@ -1,8 +1,6 @@
 os: WMF 5
 version: 1.{build}.0
-environment:
-  AccessToken:
-    secure: kDi+hDqfTslNOE+Dr+iOFWtqoJusFVPQl4ob95tDm6GSCQRifB4yAhqLjkRASzCX
+
 install: 
   - ps: |
       Get-PackageProvider -Name NuGet -Force
@@ -10,7 +8,7 @@ install:
       Install-Module -Name pester -RequiredVersion 3.3.5 -Force
       Install-Module -Name xDSCResourceDesigner -Force
       $Env:PSModulePath += (";" + (Resolve-Path .\DSCResources))
-      Get-ChildItem Env:
+
 build: false
 test_script:
   - ps: |
