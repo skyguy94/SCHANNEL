@@ -17,7 +17,9 @@ test_script:
       (New-Object Net.WebClient).UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", $outputFile)
 deploy_script:
   - ps: |
-      $path = Join-Path ${Env:APPVEYOR_BUILD_FOLDER} "${Env:APPVEYOR_PROJECT_NAME}.psd1"
+      $path = Join-Path $Env:APPVEYOR_BUILD_FOLDER "${Env:APPVEYOR_PROJECT_NAME}.psd1"
+      Write-Host "Path: $path"
+      Write-Host "$Env:APPVEYOR_PROJECT_NAME"
       #Update-ModuleManifest -Path $path -ModuleVersion ${Env:APPVEYOR_BUILD_VERSION} Won't work until PowershellGet on Appveyor is at 1.0.0.1.
       #TODO: Update Version
-      Publish-Module -Name ${Env:APPVEYOR_PROJECT_NAME} -Repository MyGet -NuGetApiKey ${Env:AccessToken} -Confirm:$false
+      Publish-Module -Name $Env:APPVEYOR_PROJECT_NAME -Repository MyGet -NuGetApiKey $Env:AccessToken -Confirm:$false
